@@ -8,10 +8,8 @@ const multer = require('multer')
 dotenv.config();
 
 const app = express();
-app.use(cors({
-    origin: process.env.FRONTEND_BASEURL,
-}));
 
+app.use(cors());
 app.use(express.json());
 
 connectDB();

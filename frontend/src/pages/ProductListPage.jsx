@@ -23,7 +23,7 @@ function ProductListPage() {
 
       try {
         const token = await session.getToken();
-        const response = await axios.get("http://localhost:8000/api/cars/", {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/cars/`, {
           headers: {
             "Authorization": `Bearer ${token}`,
           },
@@ -48,7 +48,7 @@ function ProductListPage() {
 
     try {
       const token = await session.getToken();
-      const response = await axios.get(`http://localhost:8000/api/cars/search?query=${searchQuery}`, {
+      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/cars/search?query=${searchQuery}`, {
         headers: {
           "Authorization": `Bearer ${token}`,
         },

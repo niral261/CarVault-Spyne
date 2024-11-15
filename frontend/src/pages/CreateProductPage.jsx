@@ -70,7 +70,7 @@ function CreateProductPage() {
         }
 
         try {
-            await axios.post('http://localhost:8000/api/cars/create', formData, {
+            await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/cars/create`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`,

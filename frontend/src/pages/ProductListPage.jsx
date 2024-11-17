@@ -22,7 +22,7 @@ function ProductListPage() {
 
       try {
         const token = await session.getToken();
-        const response = await axios.get(`http://localhost:8000/api/cars/`, {
+        const response = await axios.get(`https://car-vault-spyne.vercel.app/api/cars/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -50,7 +50,7 @@ function ProductListPage() {
     try {
       const token = await session.getToken();
       const response = await axios.get(
-        `http://localhost:8000/api/cars/search?query=${searchQuery}`,
+        `https://car-vault-spyne.vercel.app/api/cars/search?query=${searchQuery}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -14,7 +14,7 @@ const ProductDetailPage = () => {
 
   const fetchCarDetail = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:8000/api/cars/${id}`);
+      const { data } = await axios.get(`https://car-vault-spyne.vercel.app/api/cars/${id}`);
       setCar(data);
     } catch (error) {
       console.error("Error fetching car details", error);
@@ -29,7 +29,7 @@ const ProductDetailPage = () => {
   const handleDelete = async () => {
     console.log("Deleting car with id:", id);
     try {
-      await axios.delete(`http://localhost:8000/api/cars/${id}`);
+      await axios.delete(`https://car-vault-spyne.vercel.app/api/cars/${id}`);
       alert("Car deleted successfully!");
       navigate("/myproducts");
     } catch (error) {

@@ -27,7 +27,7 @@ const UpdateProductPage = () => {
 
   const fetchCarDetail = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:8000/api/cars/${id}`);
+      const { data } = await axios.get(`https://car-vault-spyne.vercel.app/api/cars/${id}`);
       setCar(data);
       setFormData({
         title: data.title,
@@ -106,7 +106,7 @@ const UpdateProductPage = () => {
     });
 
     try {
-      await axios.put(`http://localhost:8000/api/cars/${id}`, updatedFormData, {
+      await axios.put(`https://car-vault-spyne.vercel.app/api/cars/${id}`, updatedFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`,

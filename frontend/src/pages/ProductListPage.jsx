@@ -1,17 +1,16 @@
-// ProductListPage.js
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "@clerk/clerk-react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Alert from "../components/Alert";
-import { ProductCard } from "../components/ProductCard"; // Import the ProductCard component
+import { ProductCard } from "../components/ProductCard";
 
 function ProductListPage() {
   const [cars, setCars] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState("");
+  const [searchPerformed, setSearchPerformed] = useState(false); // Track if a search was made
   const { session, isLoaded } = useSession();
 
   useEffect(() => {
@@ -23,12 +22,14 @@ function ProductListPage() {
 
       try {
         const token = await session.getToken();
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/cars/`, {
+        const response = await axios.get(`http://localhost:8000/api/cars/`, {
           headers: {
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
+        console.log(response.data);
         setCars(response.data);
+        setSearchPerformed(false); 
       } catch (err) {
         console.error("Error fetching user's cars:", err);
         setError("Failed to fetch cars.");
@@ -48,12 +49,16 @@ function ProductListPage() {
 
     try {
       const token = await session.getToken();
-      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/cars/search?query=${searchQuery}`, {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `http://localhost:8000/api/cars/search?query=${searchQuery}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setCars(response.data);
+      setSearchPerformed(true);
     } catch (error) {
       console.error("Error searching cars:", error);
       setError("Failed to search cars.");
@@ -66,13 +71,14 @@ function ProductListPage() {
 
   return (
     <div className="max-w-3xl mx-auto my-6">
-      <div className="mb-4">
+      <div className="mb-4 flex">
         <Input
           placeholder="Search cars..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-4/5"
         />
-        <Button onClick={handleSearch} className="mt-2">
+        <Button onClick={handleSearch} className="ml-2 w-40">
           Search
         </Button>
       </div>
@@ -80,11 +86,13 @@ function ProductListPage() {
       {error && <Alert type="error" message={error} onClose={() => setError("")} />}
 
       {cars.length === 0 ? (
-        <p>No cars found. Please make sure you are logged in and have posted cars.</p>
+        searchPerformed ? (
+          <p>No cars found for "{searchQuery}".</p>
+        ) : (
+          <p>No cars available. Please make sure you are logged in and have posted cars.</p>
+        )
       ) : (
-        cars.map((car) => (
-          <ProductCard key={car._id} car={car} /> // Use ProductCard component
-        ))
+        cars.map((car) => <ProductCard key={car._id} car={car} />)
       )}
     </div>
   );

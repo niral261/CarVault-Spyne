@@ -27,7 +27,7 @@ const UpdateProductPage = () => {
 
   const fetchCarDetail = async () => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/cars/${id}`);
+      const { data } = await axios.get(`http://localhost:8000/api/cars/${id}`);
       setCar(data);
       setFormData({
         title: data.title,
@@ -106,7 +106,7 @@ const UpdateProductPage = () => {
     });
 
     try {
-      await axios.put(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/cars/${id}`, updatedFormData, {
+      await axios.put(`http://localhost:8000/api/cars/${id}`, updatedFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`,

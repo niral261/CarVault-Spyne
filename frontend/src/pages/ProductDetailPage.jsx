@@ -53,7 +53,7 @@ const ProductDetailPage = () => {
   }
 
   return (
-    <Card className="max-w-5xl mx-auto my-6">
+    <Card className="max-w-5xl mx-auto my-6 bg-stone-900 ">
       <CardHeader>
         <CardTitle>{car.title}</CardTitle>
       </CardHeader>
@@ -71,7 +71,6 @@ const ProductDetailPage = () => {
                 &#8592;
               </button>
 
-              {/* Image Display */}
               <img
                 src={car.images[currentImageIndex]}
                 alt={`Car ${currentImageIndex}`}
@@ -79,7 +78,6 @@ const ProductDetailPage = () => {
                 style={{ maxWidth: '100%', height: 'auto', objectFit: 'cover' }}
               />
 
-              {/* Right Arrow */}
               <button
                 onClick={goToNextImage}
                 className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full"
@@ -92,10 +90,10 @@ const ProductDetailPage = () => {
           <div className="w-2/3">
             <p>{car.description}</p>
             <div className="mt-4 space-x-2">
-              <Button onClick={() => navigate(`/update-product/${id}`)} variant="secondary">
+              <Button onClick={() => navigate(`/update-product/${id}`)} variant="secondary" className="border-green-500 text-green-500 hover:text-white hover:border-gray-800 hover:bg-green-500">
                 Update Product
               </Button>
-              <Button onClick={handleDelete} variant="destructive">
+              <Button onClick={handleDelete} variant="destructive" className=" border-red-500 text-red-500 hover:text-white hover:border-gray-800 hover:bg-red-500 ">
                 Delete Product
               </Button>
             </div>

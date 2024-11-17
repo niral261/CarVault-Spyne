@@ -70,7 +70,7 @@ function CreateProductPage() {
         }
 
         try {
-            await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/cars/create`, formData, {
+            await axios.post('http://localhost:8000/api/cars/create', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`,
@@ -83,7 +83,7 @@ function CreateProductPage() {
             setImages([]);
             setError('');
         } catch (error) {
-            setError(`Error creating car: ${error.response?.data?.message || error.message}`);
+            setError(`Oops 😥😥 !Publishing car`);
         }
     };
 
@@ -162,7 +162,6 @@ function CreateProductPage() {
                             accept="image/*"
                             multiple
                             onChange={handleImageChange}
-                            required
                         />
                     </div>
 

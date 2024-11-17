@@ -15,15 +15,21 @@ export function ProductCard({ car }) {
     const handleViewDetails = () => {
       navigate(`/product-detail/${car._id}`);
     };
-  
+
+    const parsedTags = Array.isArray(car.tags) ? JSON.parse(car.tags) : car.tags;
+    console.log(Array.isArray(car.tags));
+
     return (
-      <div className="border rounded-lg shadow-md p-4 mb-4">
-        {/* Render the first image if images exist */}
+      <div 
+      className="border rounded-lg shadow-md p-4 mb-4 bg-stone-900 transition-transform transform hover:shadow-xl hover:-translate-y-2 hover:rotate-x-3"
+        style={{ perspective: "1000px" }}
+      >
         {car.images && (
           <img
             src={car.images[0]}
             alt="Car"
-            className="w-full h-64 object-cover rounded-lg mb-4"
+            loading="lazy"
+            className="w-full h-100 object-cover rounded-lg mb-4"
           />
         )}
   
@@ -32,17 +38,15 @@ export function ProductCard({ car }) {
         </div>
   
         <div className="mt-2">
-          {/* Limit the description to 300 characters */}
           <p>{truncateDescription(car.description)}</p>
   
-          {/* Render tags in pink squares with 10px gap */}
           <div className="mt-2 flex flex-wrap gap-2">
-            {Array.isArray(car.tags) && car.tags.length > 0 ? (
-              car.tags.map((tag, index) => (
+            {Array.isArray(parsedTags) && parsedTags.length > 0 ? (
+              parsedTags.map((tag, index) => (
                 <span
                   key={index}
                   className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm"
-                  style={{ margin: '5px' }} // 10px distance (5px on each side)
+                  style={{ margin: '5px' }}
                 >
                   {tag}
                 </span>
@@ -53,9 +57,13 @@ export function ProductCard({ car }) {
           </div>
         </div>
   
-        {/* View Details button */}
         <div className="mt-4">
-          <Button className=" hover:bg-pink-500 hover:border-pink-500" onClick={handleViewDetails}>View Details</Button>
+          <Button
+            className="hover:bg-pink-500 hover:border-pink-500"
+            onClick={handleViewDetails}
+          >
+            View Details
+          </Button>
         </div>
       </div>
     );

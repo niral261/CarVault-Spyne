@@ -4,22 +4,24 @@ import { useState } from 'react';
 
 const Header = () => {
   const { user } = useUser();
-  const [hoveredLink, setHoveredLink] = useState(null); // Track the hovered link
+  const [hoveredLink, setHoveredLink] = useState(null);
 
   const headerStyle = {
     display: 'flex',
+    fontSize: '1.75rem',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '1rem 1.5rem',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    backgroundColor: '#000000', // Black background
+    backgroundColor: '#28282B',
+    fontFamily: "'Dancing Script', cursive",
   };
 
   const logoStyle = {
-    fontSize: '1.5rem',
     fontWeight: 'bold',
-    color: '#ffffff', // White text for the logo
+    color: '#FFEB3B', 
     textDecoration: 'none',
+    marginRight: '10px',
   };
 
   const navLinksStyle = {
@@ -29,14 +31,14 @@ const Header = () => {
   };
 
   const navLinkStyle = {
-    color: '#ffffff', // White text for links
+    color: '#ffffff', 
     fontWeight: '500',
     textDecoration: 'none',
     transition: 'color 0.2s ease',
   };
 
   const navLinkHoverStyle = {
-    color: '#e91e63', // Highlight color on hover (Persian Blue)
+    color: '#e91e63', 
   };
 
   return (

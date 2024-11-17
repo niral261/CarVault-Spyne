@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: 'https://car-vault-spyne-7kwj.vercel.app' }));
 app.use(express.json());
 
 connectDB();
